@@ -15,8 +15,9 @@ const path = require('path');
 
 // local modules
 const User = require('./model/user');
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -72,8 +73,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', userRoutes);
+app.use('/', authRoutes);
 app.use('/dashboard', dashboardRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 
