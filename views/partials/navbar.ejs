@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light latar-nav fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Molina</a>
+        
+        <button class="burger-btn-nav" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Dashboard</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-citizen-fees">Form Iuran</a>
+                </li>
+                
+                <% if(authUser.admin){ %> 
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-warga">Tambah Warga</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-outcome">Form Pengeluaran</a>
+                </li>
+                <% } %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

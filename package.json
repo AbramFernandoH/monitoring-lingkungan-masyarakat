@@ -1,0 +1,48 @@
+{
+  "name": "molina",
+  "version": "1.0.0",
+  "description": "Monitoring lingkungan masyarakat",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app",
+    "lint": "eslint . --ext js,ejs --max-warnings 0",
+    "lint:fix": "eslint . --ext js,ejs --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AbramFernandoH/monitoring-lingkungan-masyarakat.git"
+  },
+  "author": "Abram Fernando, Salahuddin Nabil, Dimastri Bima Santoso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AbramFernandoH/monitoring-lingkungan-masyarakat/issues"
+  },
+  "homepage": "https://github.com/AbramFernandoH/monitoring-lingkungan-masyarakat#readme",
+  "dependencies": {
+    "cloudinary": "^1.41.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "luxon": "^3.4.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.4.1",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nanoid": "^5.0.7",
+    "node-fetch": "^3.3.2",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "nodemon": "^3.1.3"
+  }
+}

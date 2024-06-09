@@ -1,0 +1,67 @@
+<%- layout('boilerplate/boilerplate') -%>
+
+<div class="mt-5 w-50 mx-auto border p-3">
+    <h1 class="text-center">Input Iuran</h1>  
+    <form action="add.php" method="post" enctype="multipart/form-data"> <!-- Tambah enctype -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="ID">Blok</label>
+                <input type="text" id="ID" name="ID" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="Nama">Nama Kepala Keluarga</label>
+                <input type="text" id="Nama" name="Nama" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="Kategori">Kategori Transaksi</label>
+                <select id="Kategori" name="Kategori" class="form-control" required>
+                    <option value="">Pilih Kategori</option>
+                    <option value="Belanja">Belanja</option>
+                    <option value="Tagihan">Tagihan</option>
+                    <option value="Pendapatan">Pendapatan</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="Tanggal">Tanggal Transaksi</label>
+                <input type="date" id="Tanggal" name="Tanggal" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="Nilai">Nilai Transaksi</label>
+                <input type="text" id="Nilai" name="Nilai" class="form-control" required>
+            </div>
+            <div class="col">
+                <label for="Bulan">Pembayaran Bulan</label>
+                <input type="date" id="Bulan" name="Bulan" class="form-control" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="Tipe">Tipe Transaksi</label>
+                <select id="Tipe" name="Tipe" class="form-control" required>
+                    <option value="">Pilih Tipe</option>
+                    <option value="Pemasukan">Pemasukan</option>
+                    <option value="Pengeluaran">Pengeluaran</option>
+                </select>
+            </div>
+        </div>
+        <!-- Tambahkan bagian input file -->
+        <div class="row mb-3">
+            <div class="col">
+                <label for="Bukti">Upload Bukti</label>
+                <input type="file" id="Bukti" name="Bukti" class="form-control" required>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-auto">
+                <a href='index.php' class='btn btn-sm btn-primary'>Kembali</a>
+            </div>
+            <div class="col-auto">
+                <input class="btn btn-success" type="submit" name="tambah" value="Tambah Data">
+            </div>
+        </div>
+    </form>
+</div>
