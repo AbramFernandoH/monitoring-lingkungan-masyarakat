@@ -1,0 +1,37 @@
+<%- layout('boilerplate/boilerplate') -%>
+
+<main>
+  <section id="menus-form">
+    <h1 class="text-center">Add Menu</h1>
+    <form action="/dashboard/seed-income" method="post" enctype="multipart/form-data" class="menu-admin">
+      <div class="mb-3 title">
+        <label for="title" class="form-label">address</label>
+        <input type="text" class="form-control" id="title" name="address" autocomplete="off">
+      </div>
+
+      <div class="mb-3 title">
+        <label for="title" class="form-label">nama kk</label>
+        <input type="text" class="form-control" id="title" name="headOfFamilyName" autocomplete="off">
+      </div>
+
+      <div class="mb-3 date">
+        <label for="date" class="form-label">Date of transaction</label>
+        <input type="date" class="form-control" name="dateOfTransaction" id="date">
+      </div>
+
+      <div class="mb-3 date">
+        <label for="date" class="form-label">transaction val</label>
+        <input type="number" class="form-control" name="transactionValue" id="date">
+      </div>
+
+      <div class="mb-3 images">
+        <label for="images" class="form-label">Choose Images</label>
+        <input type="file" class="form-control" id="images" name="images" accept=".jpeg, .jpg, .png, .gif, .svg" multiple>
+      </div>
+      
+      <div class="mb-3 button">
+        <button class="btn btn-success">Submit</button>
+      </div>
+    </form>
+  </section>
+</main>

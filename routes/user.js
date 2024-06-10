@@ -6,7 +6,6 @@ const { isLoggedIn, isAdmin } = require('../middleware');
 router.route('/')
     .get(isLoggedIn, isAdmin, async (req, res) => {
         const listUser = await User.find({});
-        console.log(listUser)
         res.render('user', { headTitle: 'Warga', listUser });
     })
 

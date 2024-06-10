@@ -16,7 +16,7 @@ const CitizenFeesSchema = new Schema({
     required: true
   },
   headOfFamilyName: {
-    type: Number,
+    type: String,
     required: true
   },
   dateOfTransaction: {
@@ -36,11 +36,17 @@ const CitizenFeesSchema = new Schema({
       },
       month: {
         type: Number,
+        min: 1,
+        max: 12,
         required: true,
       },
     }
   ],
-  images: [ImagesSchema]
+  images: [ImagesSchema],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
 });
 
 module.exports = mongoose.model('CitizenFees', CitizenFeesSchema);
