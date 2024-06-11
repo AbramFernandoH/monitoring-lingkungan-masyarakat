@@ -13,19 +13,19 @@
                 <div class="d-flex flex-column gap-1 p-3 rounded text-white bg-primary w-100">
                     <h5>Total Pemasukan</h5>
 
-                    <p>Rp 2.000.000</p>
+                    <p>Rp <%= chartData.totalIncomes %></p>
                 </div>
 
                 <div class="d-flex flex-column gap-1 p-3 rounded text-white bg-danger w-100">
                     <h5>Total Pengeluaran</h5>
 
-                    <p>Rp 1.000.000</p>
+                    <p>Rp <%= chartData.totalOutcomes %></p>
                 </div>
-
+                    
                 <div class="d-flex flex-column gap-1 p-3 rounded text-white bg-success w-100">
                     <h5>Sisa</h5>
-
-                    <p>Rp 1.000.000</p>
+                        
+                    <p>Rp <%= chartData.gap %></p>
                 </div>
             </div>
         </div>
@@ -252,4 +252,4 @@
     </div>
 </div>
 
-<%- include('./partials/dashboardChart') %>
+<%- include('./partials/dashboardChart', chartData) %>

@@ -1,7 +1,6 @@
 <script type="text/javascript">
     document.getElementById('IDNumber').addEventListener('keyup', (event) => {
         const allowedChars = ['Backspace', 'ArrowLeft', 'ArrowRight', ...Array.from(10).map((_, idx) => idx)]
-        console.log(event.key)
         if (!allowedChars.includes(event.key)) {
             event.preventDefault()
         }
