@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light latar-nav fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Molina</a>
+        <a class="navbar-brand" href="/dashboard">Molina</a>
         
         <button class="burger-btn-nav" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <i class="fas fa-bars"></i>
@@ -9,21 +9,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Dashboard</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="/add-citizen-fees">Form Iuran</a>
-                </li>
-                
-                <% if(authUser.admin){ %> 
-                <li class="nav-item">
-                    <a class="nav-link" href="/add-warga">Tambah Warga</a>
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/add-outcome">Form Pengeluaran</a>
-                </li>
+                <% if(authUser.admin){ %> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">List Warga</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/citizen-fees">List Pemasukan</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/outcome">List Pengeluaran</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add-citizen-fees">Form Iuran</a>
+                    </li>
                 <% } %>
 
                 <li class="nav-item">

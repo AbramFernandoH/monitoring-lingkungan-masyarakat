@@ -3,7 +3,7 @@
 <div class="mt-5 w-50 mx-auto p-3">
     <h1 class="text-center">Form Warga</h1>
 
-    <form action="/user/add" method="post">
+    <form action="/user/edit/<%= editedUser._id %>?_method=PATCH" method="post">
         <div class="row mb-3">
             <div class="d-flex flex-column gap-3 mb-3">
                 <label for="IDNumber">NIK</label>
@@ -28,7 +28,7 @@
             <div class="d-flex flex-column gap-3">
                 <label for="pass">Password</label>
 
-                <input type="password" id="pass" name="password" class="form-control" autocomplete="off" required>
+                <input type="password" id="pass" name="password" class="form-control" autocomplete="off">
             </div>
         </div>
 

@@ -27,9 +27,9 @@
                 </thead>
 
                 <tbody>
-                    <% for(let user of listUser){ %> 
+                    <% listUser.forEach((user, idx) => { %>
                         <tr>
-                            <td>1</td>
+                            <td><%= idx + 1 %></td>
     
                             <td><%= user.IDNumber %></td>
     
@@ -39,28 +39,57 @@
     
                             <td>
                                 <div class='row'>
-                                    <div class='col d-flex justify-content-center'>
+                                    <div class='col d-flex justify-content-center align-items-center gap-2'>
                                         <a href="/user/edit/<%= user._id %>" class= 'btn btn-sm btn-warning'>
                                             <i class="bi bi-pencil-square"></i>
     
                                             <span>Edit</span>
                                         </a>
+
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal<%= user._id %>">
+                                            <i class="bi bi-pencil-square"></i>
+
+                                            <span>Delete</span>
+                                        </button>
                                     </div>
                                 </div>
+
+                                <div class="modal fade" id="deleteUserModal<%= user._id %>" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h1 class="modal-title fs-5" id="deleteUserModalLabel"></h1>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <p>Apakah anda yakin ingin menghapus <%= user.headOfFamilyName %> dari data warga?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                
+                                            <form action="/user/delete/<%= user._id %>?_method=DELETE" method="post">
+                                              <button class="btn btn-danger">Ya, saya yakin</button>
+                                            </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                             </td>
                         </tr>
-                    <% } %>
+                    <% }); %>
                 </tbody>
             </table>
 
             <div class="d-flex justify-content-center align-items-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        <% if (skip > 0) { %>
+                            <li class="page-item"><a class="page-link" href="<%= currentUrl %>?skip=<%= Number(skip - limit) %>">Previous</a></li>
+                        <% } %>
+                        <% if (skip + limit <= totalUser) { %>
+                            <li class="page-item"><a class="page-link" href="<%= currentUrl %>?skip=<%= Number(skip + limit) %>">Next</a></li>
+                        <% } %>
+                        
                     </ul>
                 </nav>
             </div>
