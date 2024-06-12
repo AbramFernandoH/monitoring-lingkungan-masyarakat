@@ -3,54 +3,58 @@
 <div class="container mt-5">
     <div class="d-flex flex-column gap-3">
         <div class='d-flex align-items-center justify-content-end gap-2'>
-            <form action="/user/export" method="post">
+            <form action="/citizen-fees/export" method="post">
                 <button class="btn btn-success">Export</button>
             </form>
-
-            <a href='/user/add' class= 'btn btn-success'>
+            
+            <a href='/citizen-fees/add' class= 'btn btn-success'>
                 <i class="bi bi-cloud-upload"></i>
 
-                <span>Tambah Warga</span>
+                <span>Tambah Iuran</span>
             </a>
         </div>
 
         <div class="d-flex flex-column">
-            <h4>Tabel Warga</h4>
+            <h4>Tabel Iuran</h4>
 
             <table class="table table-striped table-hover table-bordered">
                 <thead class="table-dark">
                     <th>No</th>
 
-                    <th>NIK</th>
-
                     <th>Nama KK</th>
 
-                    <th>Alamat</th>
+                    <th>Tanggal Transaksi</th>
+
+                    <th>Nilai Transaksi</th>
+
+                    <th>Pembayaran Bulan</th>
 
                     <th class="text-center">Actions</th>
                 </thead>
 
                 <tbody>
-                    <% listUser.forEach((user, idx) => { %>
+                    <% listFees.forEach((fees, idx) => { %>
                         <tr>
                             <td><%= idx + 1 %></td>
     
-                            <td><%= user.IDNumber %></td>
+                            <td><%= fees.headOfFamilyName %></td>
     
-                            <td><%= user.headOfFamilyName %></td>
+                            <td><%= fees.dateOfTransaction %></td>
     
-                            <td><%= user.address %></td>
+                            <td><%= fees.transactionValue %></td>
+    
+                            <td><%= fees.months %></td>
     
                             <td>
                                 <div class='row'>
                                     <div class='col d-flex justify-content-center align-items-center gap-2'>
-                                        <a href="/user/edit/<%= user._id %>" class= 'btn btn-sm btn-warning'>
+                                        <a href="/citizen-fees/edit/<%= fees.id %>" class= 'btn btn-sm btn-warning'>
                                             <i class="bi bi-pencil-square"></i>
     
                                             <span>Edit</span>
                                         </a>
 
-                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal<%= user._id %>">
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCitizenFees<%= fees.id %>">
                                             <i class="bi bi-pencil-square"></i>
 
                                             <span>Delete</span>
@@ -58,20 +62,20 @@
                                     </div>
                                 </div>
 
-                                <div class="modal fade" id="deleteUserModal<%= user._id %>" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="deleteCitizenFees<%= fees.id %>" tabindex="-1" aria-labelledby="deleteCitizenFeesLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                       <div class="modal-content">
                                         <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="deleteUserModalLabel"></h1>
+                                          <h1 class="modal-title fs-5" id="deleteCitizenFeesLabel"></h1>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                          <p>Apakah anda yakin ingin menghapus <%= user.headOfFamilyName %> dari data warga?</p>
+                                          <p>Apakah anda yakin ingin menghapus transaksi bulan ke <%= fees.months %> dari data warga?</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                 
-                                            <form action="/user/delete/<%= user._id %>?_method=DELETE" method="post">
+                                            <form action="/citizen-fees/delete/<%= fees.id %>?_method=DELETE" method="post">
                                               <button class="btn btn-danger">Ya, saya yakin</button>
                                             </form>
                                         </div>
@@ -90,7 +94,7 @@
                         <% if (skip > 0) { %>
                             <li class="page-item"><a class="page-link" href="<%= currentUrl %>?skip=<%= Number(skip - limit) %>">Previous</a></li>
                         <% } %>
-                        <% if (skip + limit <= totalUser) { %>
+                        <% if (skip + limit <= totalFees) { %>
                             <li class="page-item"><a class="page-link" href="<%= currentUrl %>?skip=<%= Number(skip + limit) %>">Next</a></li>
                         <% } %>
                         

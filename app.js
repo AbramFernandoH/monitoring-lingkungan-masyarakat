@@ -18,6 +18,7 @@ const User = require('./model/user');
 const authRoutes = require('./routes/auth');
 const dashboardRoutes = require('./routes/dashboard');
 const userRoutes = require('./routes/user');
+const citizenFeesRoutes = require('./routes/citizenFees');
 
 const app = express();
 
@@ -76,6 +77,7 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/user', userRoutes);
+app.use('/citizen-fees', citizenFeesRoutes);
 
 const PORT = process.env.PORT || 3000;
 

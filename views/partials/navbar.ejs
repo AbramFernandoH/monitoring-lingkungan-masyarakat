@@ -12,13 +12,13 @@
                     <a class="nav-link" href="/dashboard">Dashboard</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/citizen-fees">List Pemasukan</a>
+                </li>
+
                 <% if(authUser.admin){ %> 
                     <li class="nav-item">
                         <a class="nav-link" href="/user">List Warga</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/citizen-fees">List Pemasukan</a>
                     </li>
 
                     <li class="nav-item">
@@ -26,7 +26,7 @@
                     </li>
                 <% } else { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/add-citizen-fees">Form Iuran</a>
+                        <a class="nav-link" href="/citizen-fees/add">Form Iuran</a>
                     </li>
                 <% } %>
 
