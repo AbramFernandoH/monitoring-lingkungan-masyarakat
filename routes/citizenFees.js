@@ -93,6 +93,28 @@ router.route('/export')
         }
     })
 
+    router.route('/add')
+    .get(isLoggedIn, isAdmin, async (req, res) => {
+        const min=DateTime.now().toFormat('yyyy-LL-dd')
+        res.render('citizen-fees/add-iuran', { headTitle: 'Input Iuran',min });
+    })
+    .post(isLoggedIn, isAdmin, async (req, res) => {
+        const form = req.body
+        const newcitizenfees = new CitizenFees({ 
+            ...req.body,
+            
+            owner: req.user,
+            months: [], 
+            images: []
+    
+         });
+         console.log(newcitizenfees,form)
+         await newcitizenfees.save()
+         res.redirect('/citizen-fees');
+
+    })
+
+
 router.route('/delete/:feesId')
     .delete(isLoggedIn, isAdmin, async (req, res) => {
         try {
