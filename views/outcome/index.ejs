@@ -1,0 +1,76 @@
+<%- layout('boilerplate/boilerplate') -%>
+
+<div class="container mt-5">
+  <div class="d-flex flex-column gap-3">
+    <div class="d-flex justify-content-end">
+      <a href="/outcome/add" class="btn btn-success">
+        <i class="bi bi-cloud-upload"></i>
+        <span>Tambah Pengeluaran</span>
+      </a>
+    </div>
+
+    <div class="d-flex flex-column">
+      <h4>Tabel Pengeluaran</h4>
+      <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>No</th>
+            <th>Jenis Transaksi</th>
+            <th>Tanggal Transaksi</th>
+            <th>Nilai Transaksi</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% listOutcome.forEach((outcome, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= outcome.typeOfTransaction %></td>
+            <td>
+              <% if(outcome && outcome.dateOfTransaction) { %> <%= new
+              Date(outcome.dateOfTransaction).toLocaleDateString() %> <% } else
+              { %> Tanggal tidak tersedia <% } %>
+            </td>
+            <td><%= outcome.transactionValue %></td>
+            <td>
+              <div class="d-flex justify-content-center gap-2">
+                <a
+                  href="/outcome/edit/<%= outcome._id %>"
+                  class="btn btn-sm btn-warning"
+                >
+                  <i class="bi bi-pencil-square"></i> Edit
+                </a>
+                <form
+                  action="/outcome/<%= outcome._id %>?_method=DELETE"
+                  method="POST"
+                  class="delete-form"
+                >
+                  <button type="submit" class="btn btn-sm btn-danger">
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const deleteForms = document.querySelectorAll(".delete-form");
+    deleteForms.forEach((form) => {
+      form.addEventListener("submit", function (e) {
+        const confirmation = confirm(
+          "Apakah Anda yakin ingin menghapus data ini?"
+        );
+        if (!confirmation) {
+          e.preventDefault();
+        }
+      });
+    });
+  });
+</script>

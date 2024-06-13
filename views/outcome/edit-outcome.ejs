@@ -1,0 +1,47 @@
+<%- layout('boilerplate/boilerplate') -%>
+
+<div class="mt-5 w-50 mx-auto p-3">
+  <h1 class="text-center">Edit Pengeluaran</h1>
+
+  <form action="/outcome/edit/<%= outcome._id %>?_method=PATCH" method="POST">
+    <div class="row mb-3">
+      <div class="form-group">
+        <label for="dropdown">Jenis Transaksi :</label>
+        <select class="form-control" id="dropdown" name="typeOfTransaction">
+          <option value="gaji" selected="<%= outcome.typeOfTransaction === 'gaji' %>">Gaji</option>
+          <option value="kebersihan" selected="<%= outcome.typeOfTransaction === 'kebersihan' %>">Kebersihan</option>
+          <option value="keamanan" selected="<%= outcome.typeOfTransaction === 'keamanan' %>">Keamanan</option>
+          <option value="lainnya" selected="<%= outcome.typeOfTransaction === 'lainnya' %>">Lainnya</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="dateOfTransaction">Tanggal Transaksi</label>
+        <input
+          type="date"
+          id="dateOfTransaction"
+          name="dateOfTransaction"
+          class="form-control"
+          required
+          value="<%= new Date(outcome.dateOfTransaction).toISOString().substring(0, 10) %>"
+        />
+      </div>
+      <div class="col">
+        <label for="transactionValue">Nilai Transaksi</label>
+        <input
+          type="number"
+          id="transactionValue"
+          name="transactionValue"
+          class="form-control"
+          required
+          value="<%= outcome.transactionValue %>"
+        />
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/typeNumberOnly') %>

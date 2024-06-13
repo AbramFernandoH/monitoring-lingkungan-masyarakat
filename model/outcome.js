@@ -1,19 +1,19 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const OutcomeSchema = new Schema({
-  type: {
+  typeOfTransaction: {
     type: String,
-    required: true
+    required: true,
   },
-  Date: {
+  dateOfTransaction: {
     type: Date,
-    required: true
+    required: true,
   },
-  value: {
+  transactionValue: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
-module.exports = mongoose.model('Outcome', OutcomeSchema);
+module.exports = mongoose.model("Outcome", OutcomeSchema);
