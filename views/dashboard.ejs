@@ -1,6 +1,7 @@
 <%- layout('boilerplate/boilerplate') -%>
 
 <div class="container mt-5">
+<<<<<<< HEAD
   <div class="d-flex flex-column gap-5">
     <div class="d-flex gap-3 align-items-center">
       <div class="d-flex flex-column gap-2 w-75">
@@ -79,6 +80,44 @@
       </a>
     </div>
 
+=======
+  <div class="d-flex flex-column gap-3">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            No. KK
+          </button>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">No.KK</a></li>
+            <li><a class="dropdown-item" href="#">Nama Kepala Keluarga</a></li>
+            <li><a class="dropdown-item" href="#">Kategori</a></li>
+          </ul>
+        </div>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Cari"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <a href="Update.php?ID=$data[ID]" class="btn btn-success">
+        <i class="bi bi-cloud-upload"></i>
+
+        <span>Export</span>
+      </a>
+    </div>
+
+>>>>>>> c74de0756908fc41fd256d37aac42521c0fe8677
     <div class="d-flex flex-column">
       <h4>Tabel Pemasukan</h4>
 
@@ -293,5 +332,8 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
 
 <%- include('./partials/dashboardChart', chartData) %>
+=======
+>>>>>>> c74de0756908fc41fd256d37aac42521c0fe8677

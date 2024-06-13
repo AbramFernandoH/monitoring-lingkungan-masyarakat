@@ -18,7 +18,10 @@ const User = require("./model/user");
 const authRoutes = require("./routes/auth");
 const dashboardRoutes = require("./routes/dashboard");
 const userRoutes = require("./routes/user");
+<<<<<<< HEAD
 const citizenFeesRoutes = require("./routes/citizenFees");
+=======
+>>>>>>> c74de0756908fc41fd256d37aac42521c0fe8677
 const outcomeRoutes = require("./routes/outcome");
 
 const app = express();
@@ -86,11 +89,18 @@ app.use((req, res, next) => {
 app.use("/", authRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/user", userRoutes);
+<<<<<<< HEAD
 app.use("/citizen-fees", citizenFeesRoutes);
+=======
+>>>>>>> c74de0756908fc41fd256d37aac42521c0fe8677
 app.use("/outcome", outcomeRoutes);
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+<<<<<<< HEAD
   console.log(`server running on port ${PORT}`);
+=======
+  console.log("server running on port 3000");
+>>>>>>> c74de0756908fc41fd256d37aac42521c0fe8677
 });
