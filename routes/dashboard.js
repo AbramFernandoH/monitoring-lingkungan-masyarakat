@@ -1,14 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
 const { DateTime } = require('luxon');
 
 const { isLoggedIn, isAdmin } = require('../middleware');
 const CitizenFees = require('../model/citizenFees');
 const Outcome = require('../model/outcome');
-
-const { storage, cloudinary } = require('../cloudinary/cloudinary');
-const upload = multer({ storage });
 
 router.route('/')
   .get(isLoggedIn, async (req, res) => {
@@ -31,13 +27,13 @@ router.route('/')
       return Outcome.aggregate([
           {
               $match: {
-                  Date: { $gte: startOfMonth, $lte: endOfMonth }
+                dateOfTransaction: { $gte: startOfMonth, $lte: endOfMonth }
               }
           },
           {
               $group: {
                   _id: null,
-                  totalValue: { $sum: "$value" }
+                  totalValue: { $sum: "$transactionValue" }
               }
           }
       ])
@@ -77,13 +73,13 @@ router.route('/')
     const outcomeDistributionFor6MonthsAggregate = await Outcome.aggregate([
         {
             $match: {
-                Date: { $gte: beginingOf6MonthsAgoJSDate }
+                dateOfTransaction: { $gte: beginingOf6MonthsAgoJSDate }
             }
         },
         {
             $group: {
-                _id: "$type",
-                totalValue: { $sum: "$value" }
+                _id: "$typeOfTransaction",
+                totalValue: { $sum: "$transactionValue" }
             }
         }
     ])
