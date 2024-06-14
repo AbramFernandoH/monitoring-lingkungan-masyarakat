@@ -1,10 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Design</title>
+    <!-- Tambahkan link ke Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tambahkan link ke Font Awesome untuk ikon burger -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Ubah latar belakang navbar */
+        .latar-nav {
+            background-color: #80BCBD; /* Warna latar belakang baru */
+        }
+
+        /* Ubah warna teks dan hover */
+        .navbar-nav .nav-link {
+            color: #ffffff; /* Warna teks putih */
+            padding: 10px 15px; /* Padding untuk jarak */
+            transition: color 0.3s; /* Transisi untuk efek hover */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #343a40; /* Warna teks saat hover */
+            background-color: transparent; /* Hilangkan latar belakang saat hover */
+        }
+
+        /* Tambahkan margin pada elemen navbar */
+        .navbar-brand, .burger-btn-nav {
+            margin-right: 20px; /* Tambahkan margin kanan */
+        }
+
+        /* Atur ulang tombol burger */
+        .burger-btn-nav {
+            border: none;
+            background: none;
+            color: #ffffff;
+            font-size: 1.25rem;
+        }
+
+        .burger-btn-nav:hover {
+            color: #343a40; /* Warna tombol burger saat hover */
+        }
+
+        /* Atur ulang ukuran dan posisi dropdown */
+        .navbar-collapse {
+            justify-content: flex-end; /* Pindahkan dropdown ke kanan */
+        }
+
+        .molina-logo{
+            width: 50px;
+            height: 50px;
+        }
+
+        @media (max-width: 992px) {
+            .navbar-collapse {
+                background-color: #80BCBD; /* Tambahkan latar belakang pada dropdown saat di mobile */
+                padding: 15px;
+            }
+
+            .navbar-nav .nav-link {
+                color: #ffffff; /* Warna teks pada dropdown di mobile */
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: #343a40; /* Warna teks saat hover di mobile */
+                background-color: transparent; /* Hilangkan latar belakang saat hover di mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
 <nav class="navbar navbar-expand-lg navbar-light latar-nav fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/dashboard">Molina</a>
         
-        <button class="burger-btn-nav" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <i class="fas fa-bars"></i>
-        </button>
+        <img 
+                    src="/css/img/logo-kkn.png"
+                    alt="Logo"
+                    class="img-fluid molina-logo"
+                  />
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
@@ -37,3 +113,10 @@
         </div>
     </div>
 </nav>
+
+<!-- Tambahkan link ke Bootstrap JS dan dependensi lainnya -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
