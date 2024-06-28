@@ -1,4 +1,12 @@
 <script type="text/javascript">
+    const currencyFormatter = (number) =>
+    new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(number)
+
     const chartMonthlyCitizenFeesTrendOptions = {
         series: [{
           name: 'Pengeluaran',
@@ -33,7 +41,7 @@
         },
         yaxis: {
           title: {
-            text: 'Rp (thousands)'
+            text: 'Rp (millions)'
           }
         },
         fill: {
@@ -41,7 +49,7 @@
         },
         tooltip: {
           y: {
-            formatter: (val) => `Rp ${val}`
+            formatter: (val) => !isNaN(val) && val > 0 ? currencyFormatter(val) : 'Rp 0'
           }
         }
         };
@@ -50,30 +58,31 @@
         
         const chartTotalOutcomeOptions = {
           series: [{
-          data: JSON.parse('<%- JSON.stringify(chartData.outcomeDistributionValues) %>')
-        }],
+            name: '',
+            data: JSON.parse('<%- JSON.stringify(chartData.outcomeDistributionValues) %>')
+          }],
           chart: {
-          type: 'bar',
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            borderRadius: 4,
-            borderRadiusApplication: 'end',
-            horizontal: true,
+            type: 'bar',
+            height: 350
+          },
+          plotOptions: {
+            bar: {
+              borderRadius: 4,
+              borderRadiusApplication: 'end',
+              horizontal: true,
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          xaxis: {
+            categories: JSON.parse('<%- JSON.stringify(chartData.outcomeDistributionNames) %>'),
+          },
+          tooltip: {
+            y: {
+              formatter: (val) => !isNaN(val) && val > 0 ? currencyFormatter(val) : 'Rp 0'
+            }
           }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        xaxis: {
-          categories: JSON.parse('<%- JSON.stringify(chartData.outcomeDistributionNames) %>'),
-        },
-        tooltip: {
-          x: {
-            formatter: (val) => `Rp ${val}`
-          }
-        }
         };
 
         const chartTotalOutcome = new ApexCharts(document.getElementById("distribusi-pengeluaran"), chartTotalOutcomeOptions);

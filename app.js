@@ -83,6 +83,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
+
+  return res.redirect('/dashboard');
+})
+
 app.use('/', authRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/user', userRoutes);

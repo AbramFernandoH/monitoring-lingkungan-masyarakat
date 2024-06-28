@@ -1,11 +1,15 @@
 require('dotenv').config();
 const ExcelJS = require("exceljs");
 const express = require('express');
-const router = express.Router();
 const { DateTime } = require('luxon');
-const CitizenFees = require('../model/citizenFees');
-const { isLoggedIn, isAdmin } = require('../middleware');
 const multer = require('multer');
+
+const CitizenFees = require('../model/citizenFees');
+const { isLoggedIn } = require('../middleware');
+const { formatCurrency } = require('../helperFunctions');
+
+const router = express.Router();
+
 const { storage, cloudinary } = require('../cloudinary/cloudinary');
 const upload = multer({ storage });
 
@@ -25,7 +29,7 @@ router.route('/')
                 id: _id,
                 headOfFamilyName,
                 dateOfTransaction: DateTime.fromJSDate(dateOfTransaction).toFormat('dd LLLL yyyy'),
-                transactionValue,
+                transactionValue: String(formatCurrency(transactionValue)).replace('Rp', ''),
                 months: months.length > 1 ? months.map(({ year, month }) => DateTime.fromObject({
                     year,
                     month,
@@ -97,11 +101,11 @@ router.route('/export')
     })
 
 router.route('/add')
-    .get(isLoggedIn, isAdmin, async (req, res) => {
+    .get(isLoggedIn, async (req, res) => {
         const min = DateTime.now().toFormat('yyyy-LL-dd')
         res.render('citizen-fees/add-iuran', { headTitle: 'Form Iuran', min });
     })
-    .post(isLoggedIn, isAdmin, upload.array('images'), async (req, res) => {
+    .post(isLoggedIn, upload.array('images'), async (req, res) => {
         const images = req.files.map(f => ({url: f.path, filename: f.filename}));
 
         const getMonthRange = (startMonth, endMonth) => {
@@ -123,6 +127,8 @@ router.route('/add')
 
         const newcitizenfees = new CitizenFees({ 
             ...form,
+            headOfFamilyName: req.user.admin ? form.headOfFamilyName : req.user.headOfFamilyName,
+            address: req.user.admin ? form.address : req.user.address,
             images,
             owner: req.user,
             months: endMonth ? getMonthRange(startMonth, endMonth) : [
@@ -139,7 +145,7 @@ router.route('/add')
     });
 
 router.route('/edit/:feesId')
-    .get(isLoggedIn, isAdmin, async (req, res) => {
+    .get(isLoggedIn, async (req, res) => {
         const editedFees = await CitizenFees.findById(req.params.feesId)
 
         const startMonth = `${editedFees.months[0].year}-${editedFees.months[0].month < 10 ? `0${editedFees.months[0].month}` : editedFees.months[0].month}`
@@ -149,12 +155,17 @@ router.route('/edit/:feesId')
 
         res.render('citizen-fees/edit-iuran', { headTitle: 'Form Iuran', editedFees, startMonth, endMonth, dateOfTransaction });
     })
-    .patch(isLoggedIn, isAdmin, upload.array('images'), async (req, res) => {
+    .patch(isLoggedIn, upload.array('images'), async (req, res) => {
         const { startMonth, endMonth, deleteImg, ...form } = req.body
 
         const fees = await CitizenFees.findByIdAndUpdate({ _id: req.params.feesId }, { ...form });
         const images = req.files.map(f => ({ url: f.path, filename: f.filename }));
         fees.images.push(...images);
+
+        if (!req.user.admin) {
+            fees.headOfFamilyName = req.user.headOfFamilyName
+            fees.address = req.user.address
+        }
 
         const getMonthRange = (startMonth, endMonth) => {
             const startDate = DateTime.fromISO(startMonth + '-01');
@@ -197,7 +208,7 @@ router.route('/edit/:feesId')
     });
 
 router.route('/delete/:feesId')
-    .delete(isLoggedIn, isAdmin, async (req, res) => {
+    .delete(isLoggedIn, async (req, res) => {
         try {
             await CitizenFees.deleteOne({ _id: req.params.feesId });
             res.redirect('/citizen-fees');

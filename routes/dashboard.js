@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { DateTime } = require('luxon');
 
-const { isLoggedIn, isAdmin } = require('../middleware');
+const { isLoggedIn } = require('../middleware');
+const { formatCurrency } = require('../helperFunctions');
 const CitizenFees = require('../model/citizenFees');
 const Outcome = require('../model/outcome');
 
@@ -96,10 +97,10 @@ router.route('/')
       gap,
       months,
       outcomeDistributionNames: outcomeDistribution.map((val) => val.name),
-      outcomeDistributionValues: outcomeDistribution.map((val) => val.totalValue)
+      outcomeDistributionValues: outcomeDistribution.map((val) => val.totalValue),
     }
 
-    res.render('dashboard', { headTitle: 'Dashboard', chartData });
+    res.render('dashboard', { headTitle: 'Dashboard', chartData, formatCurrency });
   })
 
 module.exports = router;

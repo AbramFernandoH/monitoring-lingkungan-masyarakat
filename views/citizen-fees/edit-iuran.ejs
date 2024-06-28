@@ -1,93 +1,83 @@
 <%- layout('boilerplate/boilerplate') -%>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Form Iuran</title>
-</head>
-<body>
-    <div class="mt-5 w-50 mx-auto p-3">
-        <h1 class="text-center">Form Iuran</h1>
+<div class="mt-5 w-50 mx-auto pt-5 p-3">
+    <h1 class="text-center">Form Iuran</h1>
 
-        <form action="/citizen-fees/edit/<%= editedFees._id %>?_method=PATCH" method="post" enctype="multipart/form-data">
+    <form action="/citizen-fees/edit/<%= editedFees._id %>?_method=PATCH" method="post" enctype="multipart/form-data">
+        <% if (authUser.admin) { %>
             <div class="row mb-3">
                 <div class="col">
                     <label for="address">Blok</label>
-
+    
                     <input type="text" id="address" name="address" class="form-control mt-2" autocomplete="off" required value="<%= editedFees.address %>">
                 </div>
-
+    
                 <div class="col">
                     <label for="headOfFamilyName">Nama Kepala Keluarga</label>
-
+    
                     <input type="text" id="headOfFamilyName" name="headOfFamilyName" class="form-control mt-2" autocomplete="off" required value="<%= editedFees.headOfFamilyName %>">
                 </div>
             </div>
+        <% } %>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="dateOfTransaction">Tanggal Transaksi</label>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="dateOfTransaction">Tanggal Transaksi</label>
 
-                    <input type="date" id="dateOfTransaction" name="dateOfTransaction" class="form-control mt-2" required value="<%= dateOfTransaction %>">
-                </div>
+                <input type="date" id="dateOfTransaction" name="dateOfTransaction" class="form-control mt-2" required value="<%= dateOfTransaction %>">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="transactionValue">Nilai Transaksi</label>
+
+                <input type="number" id="transactionValue" name="transactionValue" class="form-control mt-2"  autocomplete="off" required value="<%= editedFees.transactionValue %>">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label for="firstMonth">Bulan Awal</label>
+
+                <input type="month" id="firstMonth" name="startMonth" class="form-control mt-2" required value="<%= startMonth %>">
             </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="transactionValue">Nilai Transaksi</label>
+            <div class="col">
+                <label for="endMonth">Bulan Akhir</label>
 
-                    <input type="number" id="transactionValue" name="transactionValue" class="form-control mt-2"  autocomplete="off" required value="<%= editedFees.transactionValue %>">
-                </div>
+                <input type="month" id="endMonth" name="endMonth" class="form-control mt-2" value="<%= endMonth %>">
             </div>
+        </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="firstMonth">Bulan Awal</label>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="proof">Ubah Bukti Pembayaran</label>
 
-                    <input type="month" id="firstMonth" name="startMonth" class="form-control mt-2" required value="<%= startMonth %>">
-                </div>
-
-                <div class="col">
-                    <label for="endMonth">Bulan Akhir</label>
-
-                    <input type="month" id="endMonth" name="endMonth" class="form-control mt-2" value="<%= endMonth %>">
-                </div>
+                <input type="file" class="form-control mt-2" id="proof" name="images" accept=".jpeg, .jpg, .png" multiple>
             </div>
+        </div>
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="proof">Ubah Bukti Pembayaran</label>
+        <div class="mb-3">
+            <% editedFees.images.forEach(function(img, i) { %>
+            <img 
+                src="<%= img.url %>" 
+                alt="image-<%= i %>" 
+                style="height: 200px; width: 200px; border-radius: 8px;"
+            >
 
-                    <input type="file" class="form-control mt-2" id="proof" name="images" accept=".jpeg, .jpg, .png" multiple>
-                </div>
+            <div class="form-check-inline">
+                <input class="form-check-input" type="checkbox" value="<%= img.filename %>" id="image-<%= i %>" name="deleteImg[]">
+
+                <label class="form-check-label" for="image-<%= i %>">Hapus</label>
             </div>
+            <% }) %> 
+        </div>
 
-            <div class="mb-3">
-              <% editedFees.images.forEach(function(img, i) { %>
-                <img 
-                  src="<%= img.url %>" 
-                  alt="image-<%= i %>" 
-                  style="height: 200px; width: 200px; border-radius: 8px;"
-                >
-
-                <div class="form-check-inline">
-                  <input class="form-check-input" type="checkbox" value="<%= img.filename %>" id="image-<%= i %>" name="deleteImg[]">
-
-                  <label class="form-check-label" for="image-<%= i %>">Hapus</label>
-                </div>
-              <% }) %> 
+        <div class="row justify-content-center align-items-center">
+            <div class="col-auto">
+                <button class="btn btn-success" type="submit">Submit</button>
             </div>
-
-            <div class="row justify-content-center align-items-center">
-                <div class="col-auto">
-                    <button class="btn btn-success" type="submit" >submit</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+        </div>
+    </form>
+</div>

@@ -40,6 +40,7 @@ router.route('/export')
             worksheet.columns = [
                 { header: "NIK", key: "IDNumber", width: 30 },
                 { header: "Nama KK", key: "headOfFamilyName", width: 30 },
+                { header: "Username", key: "username", width: 20 },
                 { header: "Alamat", key: "address", width: 25 },
             ];
     
@@ -48,6 +49,7 @@ router.route('/export')
                 worksheet.addRow({
                     IDNumber: String(user.IDNumber),
                     headOfFamilyName: user.headOfFamilyName,
+                    username: user.username,
                     address: user.address,
                 });
             });
@@ -91,7 +93,7 @@ router.route('/edit/:userId')
         try {
             const editedUser = await User.findById(req.params.userId);
             const { password, ...rest } = req.body;
-            
+
             if (password.length > 0) {
                 await editedUser.setPassword(password);
                 await editedUser.save();

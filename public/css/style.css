@@ -13,3 +13,77 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
 }
+
+/* dashboard start */
+
+.dashboard-wrapper {
+    background-image: url('/css/img/bg.jpg'); /* Ganti 'gambar.jpg' dengan URL gambar yang diinginkan */
+    background-size: cover;
+    background-position: center;
+}
+
+/* dashboard end */
+
+/* navbar start */
+
+/* Ubah latar belakang navbar */
+.latar-nav {
+    background-color: #80BCBD; /* Warna latar belakang baru */
+}
+
+/* Ubah warna teks dan hover */
+.navbar-nav .nav-link {
+    color: #ffffff; /* Warna teks putih */
+    padding: 10px 15px; /* Padding untuk jarak */
+    transition: color 0.3s; /* Transisi untuk efek hover */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #343a40; /* Warna teks saat hover */
+    background-color: transparent; /* Hilangkan latar belakang saat hover */
+}
+
+/* Tambahkan margin pada elemen navbar */
+.navbar-brand, .burger-btn-nav {
+    margin-right: 20px; /* Tambahkan margin kanan */
+}
+
+/* Atur ulang tombol burger */
+.burger-btn-nav {
+    border: none;
+    background: none;
+    color: #ffffff;
+    font-size: 1.25rem;
+}
+
+.burger-btn-nav:hover {
+    color: #343a40; /* Warna tombol burger saat hover */
+}
+
+/* Atur ulang ukuran dan posisi dropdown */
+.navbar-collapse {
+    justify-content: flex-end; /* Pindahkan dropdown ke kanan */
+}
+
+.molina-logo{
+    width: 50px;
+    height: 50px;
+}
+
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background-color: #80BCBD; /* Tambahkan latar belakang pada dropdown saat di mobile */
+        padding: 15px;
+    }
+
+    .navbar-nav .nav-link {
+        color: #ffffff; /* Warna teks pada dropdown di mobile */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #343a40; /* Warna teks saat hover di mobile */
+        background-color: transparent; /* Hilangkan latar belakang saat hover di mobile */
+    }
+}
+
+/* navbar end */

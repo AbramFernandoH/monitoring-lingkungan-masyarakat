@@ -14,6 +14,7 @@
           <option value="lainnya" selected="<%= outcome.typeOfTransaction === 'lainnya' %>">Lainnya</option>
         </select>
       </div>
+
       <div class="col">
         <label for="dateOfTransaction">Tanggal Transaksi</label>
         <input
@@ -25,6 +26,7 @@
           value="<%= new Date(outcome.dateOfTransaction).toISOString().substring(0, 10) %>"
         />
       </div>
+      
       <div class="col">
         <label for="transactionValue">Nilai Transaksi</label>
         <input
